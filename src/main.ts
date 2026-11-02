@@ -83,9 +83,8 @@ const paths = layer
   .attr("stroke-dashoffset", 1);
 
 function layout() {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
-  svg.attr("width", width).attr("height", height).attr("viewBox", `0 0 ${width} ${height}`);
+  const { width, height } = svg.node()!.getBoundingClientRect();
+  svg.attr("viewBox", `0 0 ${width} ${height}`);
   projection.fitExtent(
     [
       [PAD, PAD],
