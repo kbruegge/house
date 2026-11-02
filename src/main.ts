@@ -1,3 +1,4 @@
+// AI disclosure: Approximately 90% of this project was coded by AI under close human guidance.
 import * as d3 from "d3";
 import type { Feature, FeatureCollection, LineString } from "geojson";
 

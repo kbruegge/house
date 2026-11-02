@@ -1,4 +1,6 @@
-# house
+> **AI disclosure:** Approximately 90% of this project was coded by AI under close human guidance.
+
+# richardstrasse.de
 
 Static placeholder website for richardstrasse.de.
 
@@ -8,21 +10,14 @@ Requires Bun 1.4.1 or later.
 
 ```sh
 bun install --frozen-lockfile
-bun run dev
-bun run build
+bun run dev # start the development server
+bun run build # or build the production bundle into dist/index.html
 ```
 
-The build generates `src/generated/roads.ts` from the checked-in `osm_data/richardstrasse-bochum.geojson` and writes the static site to `dist/`.
+## Map data and build
 
-## Coolify deployment
+The map data comes from a regional OpenStreetMap PBF extract. `draw_richardstrasse.py` reads the local extract, finds Richardstraße near Bochum, and exports nearby roads and railways to the checked-in GeoJSON, omitting unnecessary metadata. 
 
-The Dockerfile follows the personal website's Bun build and Nginx runtime setup. To test locally:
+`scripts/generate-roads.ts` gzips that GeoJSON and encodes it as base64 in `src/generated/roads.ts`. Bun embeds it in the HTML, and the browser decompresses it before drawing the map. This keeps the map data compact and avoids a separate data request, reducing the downloaded page size.
 
-```sh
-docker build -t house .
-docker run --rm -p 8080:80 house
-```
-
-Open http://localhost:8080. In Coolify, connect this repository and select the **Dockerfile** build pack. Set the exposed/target port to **80**, not 3000; no host port mapping is needed. Configure `https://richardstrasse.de` as the domain and let Coolify manage HTTPS.
-
-For the cutover, first deploy and test using a temporary Coolify domain. Then point the domain's DNS A record to the Coolify VPS, and update or remove any AAAA record to match the VPS's IPv6 configuration. Verify DNS, HTTPS and the site before disabling GitHub Pages. The `CNAME` file is retained for the existing Pages deployment until cutover; it is not used by the container.
+As defined in `package.json`, both `bun run dev` and `bun run build` always run the generate step first. The build then bundles and minifies the site into a single self-contained `dist/index.html`; see the [Bun standalone HTML documentation](https://bun.com/docs/bundler/standalone-html).
