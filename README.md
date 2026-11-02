@@ -14,6 +14,14 @@ bun run dev # start the development server
 bun run build # or build the production bundle into dist/index.html
 ```
 
+To update the HTML's timestamp automatically on each commit, enable the repository's hook once:
+
+```sh
+git config core.hooksPath .githooks
+```
+
+The hook records UTC date and time and stages `src/index.html`. Stage or stash any changes to that file before committing so the hook cannot include unstaged edits accidentally.
+
 ## Map data and build
 
 The map data comes from a regional OpenStreetMap PBF extract. `draw_richardstrasse.py` reads the local extract, finds Richardstraße near Bochum, and exports nearby roads and railways to the checked-in GeoJSON, omitting unnecessary metadata. 

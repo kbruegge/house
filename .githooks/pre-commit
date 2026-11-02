@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+file=src/index.html
+# Never silently include unstaged edits to the page in a commit.
+if ! git diff --quiet -- "$file"; then
+  echo "Stage or stash changes to $file before committing (the hook updates its timestamp)." >&2
+  exit 1
+fi
+
+if ! grep -q '<!-- Last updated: .* -->' "$file"; then
+  echo "Missing Last updated comment in $file." >&2
+  exit 1
+fi
+
+updated=$(date -u '+%Y-%m-%d %H:%M UTC')
+UPDATED="$updated" perl -i -pe 's/<!-- Last updated: .* -->/<!-- Last updated: $ENV{UPDATED} -->/' "$file"
+git add -- "$file"

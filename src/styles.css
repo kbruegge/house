@@ -15,6 +15,7 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100vh;
   background: var(--paper);
@@ -165,6 +166,22 @@ a:hover {
   text-decoration-color: currentColor;
 }
 
+.github-link {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.75rem;
+  z-index: 2;
+  color: #817968;
+  font: 0.65rem monospace;
+  opacity: 0.55;
+  text-decoration: none;
+}
+
+.github-link:hover,
+.github-link:focus-visible {
+  opacity: 1;
+}
+
 @media (max-width: 900px) {
   #map {
     position: absolute;
@@ -178,7 +195,7 @@ a:hover {
   .page {
     align-items: flex-start;
     justify-content: center;
-    padding: calc(min(100vw, 600px) - 4rem) 5vw 5vh;
+    padding: calc(min(100vw, 600px) - 4rem) 5vw 3rem;
   }
 
   .card {
