@@ -1,0 +1,7 @@
+node_modules/
+dist/
+src/generated/
+__pycache__/
+*.pyc
+osm_data/*.pbf
+.DS_Store

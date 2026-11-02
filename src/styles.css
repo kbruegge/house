@@ -1,0 +1,185 @@
+:root {
+  --paper: #f7f4ee;
+  --ink: #3a434c;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* Map sits behind everything and never intercepts input. */
+#map {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  /* Soften only the rim of the circular map so it doesn't read as a hard disc. */
+  -webkit-mask-image: radial-gradient(closest-side, #000 90%, transparent 100%);
+  mask-image: radial-gradient(closest-side, #000 90%, transparent 100%);
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 6vh 6vw;
+}
+
+/* Opaque-ish panel keeps the text readable over the faint lines. */
+.card {
+  width: min(100%, 39rem);
+  padding: 2.25rem 2.5rem;
+  border-radius: 0.6rem;
+  background: rgba(247, 244, 238, 0.4);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 1px 2px rgba(60, 55, 45, 0.06),
+    0 10px 30px rgba(60, 55, 45, 0.08);
+}
+
+.eyebrow {
+  margin: 0 0 0.6rem;
+  color: #817968;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0 0 1.1rem;
+  font-size: clamp(2.55rem, 7vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.intro {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.namesakes {
+  margin-top: 1.9rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(58, 67, 76, 0.14);
+}
+
+.namesakes h2,
+.sources h2 {
+  margin: 0 0 0.85rem;
+  color: #746b5d;
+  font-size: 0.68rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.namesakes ul,
+.sources ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.namesakes ul {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.namesakes li {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  gap: 0.75rem;
+  align-items: baseline;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.dates {
+  color: #817968;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.namesakes strong {
+  font-weight: 600;
+}
+
+.sources {
+  margin-top: 1.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(58, 67, 76, 0.14);
+}
+
+.sources h2 {
+  margin-bottom: 0.45rem;
+}
+
+.sources ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 1rem;
+}
+
+.sources li {
+  font-size: 0.74rem;
+  line-height: 1.6;
+}
+
+a {
+  color: #76501f;
+  text-decoration-color: rgba(118, 80, 31, 0.38);
+  text-underline-offset: 0.16em;
+}
+
+a:hover {
+  color: #4e3516;
+  text-decoration-color: currentColor;
+}
+
+@media (max-width: 600px) {
+  .page {
+    align-items: center;
+    padding: 5vh 5vw;
+  }
+
+  .card {
+    padding: 1.65rem 1.4rem;
+  }
+
+  .namesakes li {
+    grid-template-columns: 4.5rem 1fr;
+    gap: 0.5rem;
+  }
+
+  .sources ul {
+    gap: 0.2rem 0.8rem;
+  }
+}

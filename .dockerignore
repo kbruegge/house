@@ -1,0 +1,8 @@
+.git
+node_modules
+dist
+src/generated
+__pycache__
+osm_data/__pycache__
+osm_data/*.pbf
+.DS_Store
